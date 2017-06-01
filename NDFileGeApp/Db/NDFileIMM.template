@@ -1,0 +1,298 @@
+# Database for NDFile driver, which saves files for NDArray data.
+# Mark Rivers, Tim Madden
+# April 7, 2008, Nov 2009
+
+include "NDFile.template"
+include "NDPluginBase.template"
+
+
+
+   
+
+    
+       
+
+
+
+record(ai, "$(P)$(R)NDFileGe_ge_elapsed_RBV")
+{
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_ge_elapsed")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P)$(R)NDFileGe_is_already_ge_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_is_already_ge")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+record(longin, "$(P)$(R)NDFileGe_ge_systicks_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_ge_systicks")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+record(longin, "$(P)$(R)NDFileGe_ge_corecoticks_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_ge_corecoticks")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+record(longin, "$(P)$(R)NDFileGe_ge_dlen_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_ge_dlen")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+
+
+
+record(longout, "$(P)$(R)NDFileGe_threshold")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_threshold")
+    field(VAL,  "0")
+}
+
+
+record(longin, "$(P)$(R)NDFileGe_threshold_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_threshold")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+record(longin, "$(P)$(R)NDFileGe_is_ge_comp_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_is_ge_comp")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+record(ai, "$(P)$(R)NDFileGe_timestamp_RBV")
+{
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_timestamp")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}
+
+
+
+record(longin, "$(P)$(R)NDFileGe_num_ge_pixels_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_num_ge_pixels")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+
+###################################################################
+#  These records control file I/O                                 # 
+###################################################################
+
+# File data format 
+record(mbbo, "$(P)$(R)NDFileGe_format")
+{
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_format")
+    field(VAL,  "0")
+    field(ZRST, "Ge_Raw")
+    field(ZRVL, "0")
+    field(ONST, "Ge_Cmprs")
+    field(ONVL, "1")
+}
+
+record(mbbi, "$(P)$(R)NDFileGe_format_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_format")
+    field(ZRST, "Ge_Raw")
+    field(ZRVL, "0")
+    field(ONST, "Ge_Cmprs")
+    field(ONVL, "1")
+    field(SCAN, "I/O Intr")
+}
+    
+    
+    
+
+
+
+
+
+
+
+
+
+record(longin, "$(P)$(R)NDFileGe_uniqueID_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_uniqueID")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+
+
+    
+    
+    
+
+record(longout, "$(P)$(R)NDFileGe_printAttributes")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_printAttributes")
+    field(VAL,  "1")
+}    
+
+
+
+
+
+
+record(longout, "$(P)$(R)NDFileGe_NmissedTimeStamps")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_NmissedTimeStamps")
+    field(VAL,  "0")
+}
+
+
+record(longin, "$(P)$(R)NDFileGe_NmissedTimeStamps_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_NmissedTimeStamps")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+record(longout, "$(P)$(R)NDFileGe_NmissedIDs")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_NmissedIDs")
+    field(VAL,  "0")
+}
+
+
+record(longin, "$(P)$(R)NDFileGe_NmissedIDs_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_NmissedIDs")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+record(longout, "$(P)$(R)NDFileGe_Nimg_rst_ts")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_Nimg_rst_ts")
+    field(VAL,  "0")
+}
+
+
+record(longin, "$(P)$(R)NDFileGe_Nimg_rst_ts_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_Nimg_rst_ts")
+    field(SCAN, "I/O Intr")
+}
+
+
+
+
+# File save mode 
+record(mbbo, "$(P)$(R)NDFileGe_throw_images")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_throw_images")
+    field(VAL,  "0")
+    field(ZRST, "No NDArrays")
+    field(ZRVL, "0")
+    field(ONST, "Throw NDArrays")
+    field(ONVL, "1")
+    field(VAL,  "0")
+}
+
+record(mbbi, "$(P)$(R)NDFileGe_throw_images_RBV")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_throw_images")
+    field(ZRST, "No NDArrays")
+    field(ZRVL, "0")
+    field(ONST, "Throw NDArrays")
+    field(ONVL, "1")
+    field(SCAN, "I/O Intr")
+    field(VAL, "0")
+}
+
+
+
+record(ao, "$(P)$(R)NDFileGe_framePeriod")
+{
+   field(PINI, "YES")
+   field(DTYP, "asynFloat64")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_framePeriod")
+   field(PREC, "3")
+   field(VAL,  "1.0")
+}
+
+record(ai, "$(P)$(R)NDFileGe_framePeriod_RBV")
+{
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_framePeriod")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}
+
+
+
+
+
+
+
+
+record(longin, "$(P)$(R)NDFileGe_fileevent")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_fileevent")
+    field(SCAN, "I/O Intr")
+}

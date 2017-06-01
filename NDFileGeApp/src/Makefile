@@ -14,19 +14,15 @@ endif
 #USR_INCLUDES += $(GOOGLEPROTO_INCLUDE)
 
 
-LIBRARY_IOC = NDPluginIMM
+LIBRARY_IOC = NDPluginGe
 
-DBD += IMMpluginSupport.dbd
+DBD += GepluginSupport.dbd
 
-INC += NDFileIMM.h
-INC += compressed_file2.h
-INC += image_file2.h
-INC += drvNDFileIMM.h
+INC += NDFileGe.h
+INC += drvNDFileGe.h
 
 
-NDPluginIMM_SRCS += NDFileIMM.cpp
-NDPluginIMM_SRCS += compressed_file2.cpp
-NDPluginIMM_SRCS += image_file2.cpp
+NDPluginGe_SRCS += NDFileGe.cpp
 
 include $(ADCORE)/ADApp/commonLibraryMakefile
 
