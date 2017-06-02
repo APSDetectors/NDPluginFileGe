@@ -43,152 +43,83 @@ using std::string;
 
 /* This version number is an attribute in the TIFF file to allow readers
  * to handle changes in the file contents */
-//#define NDTIFFFileVersion 1.0
 
 
-
-
-
-
-
-
-/** Writes NDArrays in the TIFF file format.
-    Tagged Image File Format is a file format for storing images.  The format was originally created by Aldus corporation and is
-    currently developed by Adobe Systems Incorporated.  This plugin was developed using the libtiff library to write the file.
-    The current version is only capable of writes 2D images with 1 image per file.
-    */
+/**
+ * Binary format file writer for Ge Strip detector. Straight binary that assumes dims in ND array are just memory size.
+ * Actual num  bytes written are in attrubutes. attr read then that num of bytes are written
+  
+  
+  */
 
 class NDFileGe : public NDPluginFile {
-public:
-    NDFileGe(const char *portName,int max_ge_bytes, int queueSize, int blockingCallbacks,
-                 const char *NDArrayPort, int NDArrayAddr,
-                 int priority, int stackSize);
+        public:
+                NDFileGe(const char *portName,int max_ge_bytes, int queueSize, int blockingCallbacks,
+                                const char *NDArrayPort, int NDArrayAddr,
+                                int priority, int stackSize);
 
-	virtual void processCallbacks(NDArray *pArray);
-    /* The methods that this class implements */
-    virtual asynStatus openFile(const char *fileName, NDFileOpenMode_t openMode, NDArray *pArray);
-    virtual asynStatus readFile(NDArray **pArray);
-    virtual asynStatus writeFile(NDArray *pArray);
-    virtual asynStatus closeFile();
+                virtual void processCallbacks(NDArray *pArray);
+                /* The methods that this class implements */
+                virtual asynStatus openFile(const char *fileName, NDFileOpenMode_t openMode, NDArray *pArray);
+                virtual asynStatus readFile(NDArray **pArray);
+                virtual asynStatus writeFile(NDArray *pArray);
+                virtual asynStatus closeFile();
 
+                asynStatus writeOctet(
+                                asynUser *pasynUser, 
+                                const char *value,
+                                size_t nChars, 
+                                size_t *nActual);
 
+        protected:
+                int *pAttributeId;
 
-
-
-
-asynStatus writeOctet(
-	asynUser *pasynUser, 
-	const char *value,
-      	size_t nChars, 
-	size_t *nActual);
-
-protected:
-    int arrayDataId;
-    int uniqueIdId;
-    int timeStampId;
-    int nextRecord;
-    int *pAttributeId;
-    
-    int max_ge_bytes;
-		bool is_open_good;
+                int max_ge_bytes;
 
 
-	NDAttribute *pAttribute;
-    char name[256];
-    char description[256];
-    char tempString[256];
-    NDAttrDataType_t attrDataType;
-    size_t attrSize;
-    int numAttributes, attrCount;
-
-	int ii0,ii1;
-
-	int threshold, is_ge_comp;
-		double acq_time;
-	
-	int ge_pixels;
-	unsigned int fpga_timestamp;
-	
-
-    int is_already_ge;
-    int pipe_num_shorts;
-
-	int bytesperpix;
-	int cam_type;
-	int fileformat;
-
-	int last_filenumber;
-	bool is_valid_head;
+                NDAttribute *pAttribute;
+                char name[256];
+                char description[256];
+                char tempString[256];
+                NDAttrDataType_t attrDataType;
+                size_t attrSize;
+                int numAttributes, attrCount;
 
 
-	int last_unique_id;
-	double last_timestamp;
-	int timestamp_reset_counter;
+                enum which_timestamp {
+                        xcorecoticks,
+                        xfpga_ts,
+                        xarray_timestamp,
+                        xarray_unique_id
 
-	// if fpga or coreco attrubute,we use this timestamp.
-	bool is_coreco_timestamp;
-	double general_timestamp;
+                };
 
+                FILE *myfile;
 
-	enum which_timestamp {
-		xcorecoticks,
-		xfpga_ts,
-		xarray_timestamp,
-		xarray_unique_id
+                NDArray *my_array;
 
-	};
-
-	FILE *myfile;
-
-	NDArray *my_array;
-
-	//
-	// Params
-	//
-	int NDFileGe_threshold;
-    // from old dalsa fpga real time compression fpga, old fccd
-	int NDFileGe_is_ge_comp;
-	
-	int NDFileGe_num_ge_pixels;
-	
-    
-    int NDFileGe_timestamp;
-    int NDFileGe_uniqueID;
-    int NDFileGe_printAttributes;
-    int NDFileGe_NmissedTimeStamps;
-    int NDFileGe_framePeriod;
-    int NDFileGe_NmissedIDs;
-	int NDFileGe_Nimg_rst_ts;
-	int NDFileGe_throw_images;
-	int NDFileGe_fileevent;
-    
-    int NDFileGe_is_already_ge;
-    int NDFileGe_ge_systicks;
-    int NDFileGe_ge_corecoticks;
-    int NDFileGe_ge_elapsed;
-    int NDFileGe_ge_dlen;
-    int NDFileGe_format; 
-    
-
-	enum {num_params=18};
-
-		unsigned int file_coreco_ts;
-		double file_elapsed_ts;
-		unsigned int file_systick_ts;
+                //
+                // Params
+                //
+                
+                int NDFileGe_num_events;
+                int NDFileGe_fnum;
+                int NDFileGe_printAttributes;
+                enum {num_params=3};
 
 
-	int getIntParam(int param){
-		int output;
-		getIntegerParam(param,&output);
-		return(output);
-	};
+                int getIntParam(int param){
+                        int output;
+                        getIntegerParam(param,&output);
+                        return(output);
+                };
 
 
-	double getDoubParam(int param){
-		double output;
-		getDoubleParam(param,&output);
-		return(output);
-	};
+                double getDoubParam(int param){
+                        double output;
+                        getDoubleParam(param,&output);
+                        return(output);
+                };
 
 };
 

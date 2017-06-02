@@ -1,0 +1,38 @@
+# Database for NDFile driver, which saves files for NDArray data.
+# Mark Rivers, Tim Madden
+# April 7, 2008, Nov 2009
+
+include "NDFile.template"
+include "NDPluginBase.template"
+
+
+
+
+
+
+record(longin, "$(P)$(R)NDFileGe_num_events_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_num_events")
+    field(SCAN, "I/O Intr")
+}
+
+    
+record(longin, "$(P)$(R)NDFileGe_fnum_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_fnum")
+    field(SCAN, "I/O Intr")
+}
+
+    
+record(longin, "$(P)$(R)NDFileGe_printAttributes_RBV")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))NDFileGe_printAttributes")
+    field(SCAN, "I/O Intr")
+}
+
+    
+       
+
